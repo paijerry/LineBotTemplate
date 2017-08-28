@@ -54,8 +54,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					a1 := linebot.NewMessageTemplateAction("say hello", "hello")
 					a2 := linebot.NewURITemplateAction("google", "https://www.google.com.tw/")
 
-					linebot.NewButtonsTemplate("http://images.all-free-download.com/images/graphiclarge/rosa_red_beautiful_girl_219903.jpg", "test", "你好嗎", a1, a2)
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+" 是嗎!?")).Do(); err != nil {
+					tmp := linebot.NewButtonsTemplate("http://images.all-free-download.com/images/graphiclarge/rosa_red_beautiful_girl_219903.jpg", "test", "你好嗎", a1, a2)
+
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTemplateMessage("Test", tmp)).Do(); err != nil {
 						log.Print(err)
 					}
 				}

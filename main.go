@@ -20,7 +20,7 @@ import (
 	"time"
 
 	"github.com/line/line-bot-sdk-go/linebot"
-	"github.com/zabawaba99/firego"
+	"gopkg.in/zabawaba99/firego.v1"
 )
 
 var bot *linebot.Client
@@ -73,7 +73,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("To "+event.Source.UserID+":"+event.Source.GroupID+":"+event.Source.RoomID+":"+message.Text+" 是嗎!?")).Do(); err != nil {
 					log.Print(err)
 				}
-				if err = fire.Set(map[string]string{time.Now().Format(time.RFC3339): message.Text}); err != nil {
+				if err = fire.Set(map[string]interface{}{time.Now().Format(time.RFC3339): message.Text}); err != nil {
 					log.Print(err)
 				}
 			}

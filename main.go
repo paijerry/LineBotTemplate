@@ -20,7 +20,6 @@ import (
 	"time"
 
 	"github.com/line/line-bot-sdk-go/linebot"
-	"github.com/zabawaba99/fireauth"
 	"gopkg.in/zabawaba99/firego.v1"
 )
 
@@ -31,14 +30,14 @@ func init() {
 	firego.TimeoutDuration = time.Minute
 	fire = firego.New("https://haru-line.firebaseio.com/", nil)
 
-	gen := fireauth.New("paiharu0317@gmail.com")
-	data := fireauth.Data{"uid": "SnDhy01FPnNOzOyjNQzgDksX8WI2"}
-	token, err := gen.CreateToken(data, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-	println("my token: ", token)
-	fire.Auth(token)
+	// gen := fireauth.New("paiharu0317@gmail.com")
+	// data := fireauth.Data{"uid": "SnDhy01FPnNOzOyjNQzgDksX8WI2"}
+	// token, err := gen.CreateToken(data, nil)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// println("my token: ", token)
+	// fire.Auth(token)
 }
 
 func main() {

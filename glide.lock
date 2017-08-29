@@ -1,12 +1,10 @@
 hash: 1ff468b782b3fff139e393c795b96f4af180475b40f1fc644aad42b37bf21cf3
-updated: 2017-08-29T17:33:11.123458992+08:00
+updated: 2017-08-29T17:43:43.94599155+08:00
 imports:
 - name: github.com/line/line-bot-sdk-go
   version: 3a7d66f5efce6ac202f650134609f9d6d163a640
   subpackages:
   - linebot
-- name: github.com/zabawaba99/fireauth
-  version: a96e4680fe079c9d29db732873742573c1d5b2be
 - name: github.com/zabawaba99/firego
   version: 4d07741c1dde0b0d76218e8365baea10c33cf968
   subpackages:

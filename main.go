@@ -81,7 +81,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("To "+event.Source.UserID+":"+event.Source.GroupID+":"+event.Source.RoomID+":"+message.Text+" 是嗎!?")).Do(); err != nil {
 					log.Print(err)
 				}
-				if err = fire.Set(map[string]interface{}{time.Now().Format(time.RFC3339): message.Text}); err != nil {
+
+				if _, err = fire.Push(map[string]interface{}{time.Now().Format(time.RFC3339): message.Text}); err != nil {
 					log.Print(err)
 				}
 			}

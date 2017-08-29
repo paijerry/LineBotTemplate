@@ -24,23 +24,18 @@ import (
 )
 
 // ParseRequest method
-func (client *Client) ParseRequest(r *http.Request) ([]*Event, error) {
-	return ParseRequest(client.channelSecret, r)
-}
-
-// ParseRequest func
-func ParseRequest(channelSecret string, r *http.Request) ([]*Event, error) {
+func (client *Client) ParseRequest(r *http.Request) ([]Event, error) {
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		return nil, err
 	}
-	if !validateSignature(channelSecret, r.Header.Get("X-Line-Signature"), body) {
+	if !client.validateSignature(r.Header.Get("X-LINE-Signature"), body) {
 		return nil, ErrInvalidSignature
 	}
 
 	request := &struct {
-		Events []*Event `json:"events"`
+		Events []Event `json:"events"`
 	}{}
 	if err = json.Unmarshal(body, request); err != nil {
 		return nil, err
@@ -48,12 +43,12 @@ func ParseRequest(channelSecret string, r *http.Request) ([]*Event, error) {
 	return request.Events, nil
 }
 
-func validateSignature(channelSecret, signature string, body []byte) bool {
+func (client *Client) validateSignature(signature string, body []byte) bool {
 	decoded, err := base64.StdEncoding.DecodeString(signature)
 	if err != nil {
 		return false
 	}
-	hash := hmac.New(sha256.New, []byte(channelSecret))
+	hash := hmac.New(sha256.New, []byte(client.channelSecret))
 	hash.Write(body)
 	return hmac.Equal(decoded, hash.Sum(nil))
 }

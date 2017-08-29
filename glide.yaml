@@ -1,0 +1,7 @@
+package: github.com/paijerry/LineBotTemplate
+import:
+- package: github.com/line/line-bot-sdk-go
+  version: ^1.0.0
+  subpackages:
+  - linebot
+- package: gopkg.in/zabawaba99/firego.v1

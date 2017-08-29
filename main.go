@@ -44,6 +44,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
+	log.Print("ParseRequest success")
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
@@ -58,6 +59,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTemplateMessage("Test", tmp)).Do(); err != nil {
 						log.Print(err)
+						log.Print("123321")
 					}
 				}
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+" 是嗎!?")).Do(); err != nil {

@@ -59,10 +59,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					msg := linebot.NewTemplateMessage("Test", tmp)
 					if _, err = bot.ReplyMessage(event.ReplyToken, msg).Do(); err != nil {
 						log.Print(err)
-						log.Print("123321")
 					}
 				}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+" 是嗎!?")).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("To "+event.Source.UserID+":"+event.Source.GroupID+":"+event.Source.RoomID+":"+message.Text+" 是嗎!?")).Do(); err != nil {
 					log.Print(err)
 				}
 			}

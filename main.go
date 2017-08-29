@@ -17,11 +17,20 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/zabawaba99/firego"
 )
 
 var bot *linebot.Client
+var fire *firego.Firebase
+
+func init() {
+	firego.TimeoutDuration = time.Minute
+	fire = firego.New("https://haru-line.firebaseio.com/", nil)
+	fire.Auth("SnDhy01FPnNOzOyjNQzgDksX8WI2")
+}
 
 func main() {
 	var err error
@@ -62,6 +71,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					}
 				}
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("To "+event.Source.UserID+":"+event.Source.GroupID+":"+event.Source.RoomID+":"+message.Text+" 是嗎!?")).Do(); err != nil {
+					log.Print(err)
+				}
+				if err = fire.Set(map[string]string{time.Now().Format(time.RFC3339): message.Text}); err != nil {
 					log.Print(err)
 				}
 			}

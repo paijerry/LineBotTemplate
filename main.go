@@ -55,7 +55,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					a1 := linebot.NewMessageTemplateAction("say hello", "hello")
 					a2 := linebot.NewURITemplateAction("google", "https://www.google.com.tw/")
 
-					tmp := linebot.NewButtonsTemplate("", "test", "你好嗎", a1, a2)
+					tmp := linebot.NewButtonsTemplate("https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg", "test", "你好嗎", a1, a2)
 					msg := linebot.NewTemplateMessage("Test", tmp)
 					if _, err = bot.ReplyMessage(event.ReplyToken, msg).Do(); err != nil {
 						log.Print(err)
